@@ -208,4 +208,6 @@ router.delete('/deleteuser',verify.verfiytoken,controller.deleteuser);
 
 router.put('/updateuser',verify.verfiytoken,controller.updatesingleuser);
 
+router.post('/adddetails',verify.verfiytoken,controller.adddetails);
+
 module.exports = router;

@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 require('./config/database_config');
 require('./model/userModel');
+require('./model/userdetails');
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');

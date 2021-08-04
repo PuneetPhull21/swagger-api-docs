@@ -2,6 +2,7 @@ require('../config/database_config');
 
 const monngose = require('mongoose');
 const User = monngose.model('user');
+const Details = monngose.model('details');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt =  require('jsonwebtoken');
@@ -148,3 +149,31 @@ module.exports.fetchuser = (req, res) => {
         });
       });
   };
+
+
+  module.exports.adddetails = async (req,res)=>{
+      console.log(req.body);
+      var adddetails = await new Details({
+          _id:id.id,
+          country:req.body.country,
+          state:req.body.state,
+          city:req.body.city,
+          books:req.body.books
+      })
+      adddetails.save().then((data)=>{
+         return res.status(200).json({
+              status:200,
+              success:true,
+              message:"details is add",
+              data:data
+          })
+
+      })
+      .catch((error)=>{
+          return res.status(400).json({
+              status:400,
+              success:false,
+              error:error
+          })
+      })
+  }
