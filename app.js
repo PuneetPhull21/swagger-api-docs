@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('./config/database_config');
+require('./model/userModel');
+
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 
@@ -21,6 +24,7 @@ const swaggerDefinition = {
       name: 'Licensed Under MIT',
       url: 'https://spdx.org/licenses/MIT.html',
     },
+   
     contact: {
       name: 'JSONPlaceholder',
       url: 'https://jsonplaceholder.typicode.com',
@@ -32,10 +36,26 @@ const swaggerDefinition = {
       description: 'Development server',
     },
   ],
+  components: {
+    securitySchemes: {
+      jwt: {
+        type: "http",
+        scheme: "bearer",
+        in: "header",
+        bearerFormat: "JWT"
+      },
+    }
+  }
+  ,
+  security: [{
+    jwt: []
+  }],
+  
 };
 
 const options = {
     swaggerDefinition,
+    
   // Paths to files containing OpenAPI definitions
   apis: ['./routes/*.js'],
 };
